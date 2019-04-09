@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import NewsLayout from "@/pages/layout/news";
 
@@ -7,7 +8,7 @@ import NewsCard from "../../components/news-card";
 
 import { queryNews } from "@/api";
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super();
     this.state = {
@@ -15,12 +16,14 @@ export default class Home extends Component {
     };
   }
 
-  async initState() {
+  async fetchNews() {
+    const { language = "en", category = "" } = this.props;
+
     const defaultQuery = {
       sources: "",
       q: "",
-      category: "",
-      language: "en",
+      category,
+      language,
       country: ""
     };
 
@@ -36,7 +39,13 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.initState();
+    this.fetchNews();
+  }
+
+  componentWillReceiveProps(next, prev) {
+    if (next.language !== prev.language || next.category !== prev.category) {
+      this.fetchNews();
+    }
   }
 
   render() {
@@ -65,3 +74,12 @@ export default class Home extends Component {
     );
   }
 }
+
+const mapState = state => {
+  return {
+    language: state.language,
+    category: state.category
+  };
+};
+
+export default connect(mapState)(Home);

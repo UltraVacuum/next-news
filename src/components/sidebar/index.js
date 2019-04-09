@@ -1,21 +1,11 @@
 import React from "react";
-
-// import Router from "react-router";
+import classNames from "classnames";
+import { connect } from "react-redux";
+import { changeCategory } from "@/store";
 
 import "./index.scss";
 
-function queryCategory(category) {
-  // const oldQuery = Router.query;
-  // Router.push({
-  //   pathname: "/",
-  //   query: {
-  //     ...oldQuery,
-  //     category
-  //   }
-  // });
-}
-
-export default function CategoryNav() {
+function CategoryNav({ category, dispatch }) {
   const categories =
     "business entertainment general health science sports technology";
   return (
@@ -23,8 +13,8 @@ export default function CategoryNav() {
       {categories.split(" ").map((item, index) => {
         return (
           <span
-            className="nav-link"
-            onClick={() => queryCategory(item)}
+            className={classNames("nav-link", { active: item === category })}
+            onClick={() => dispatch(changeCategory(item))}
             key={index}
           >
             {item}
@@ -34,3 +24,7 @@ export default function CategoryNav() {
     </nav>
   );
 }
+
+const mapState = state => ({ category: state.category });
+
+export default connect(mapState)(CategoryNav);
