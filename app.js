@@ -1,25 +1,24 @@
 const express = require("express");
-const next = require("next");
+const path = require("path");
 
-const port = parseInt(process.env.PORT, 10) || 8080;
-const dev = process.env.NODE_ENV !== "production";
-const app = next({ dev });
-const handle = app.getRequestHandler();
+const app = express();
 
-app.prepare().then(() => {
-  const server = express();
+// Serve the static files from the React app
+app.use(express.static(path.join(__dirname, "client/build")));
 
-  server.get("/", (req, res) => {
-    console.log("query ===>", req.query);
-    return app.render(req, res, "/index", req.query);
-  });
-
-  server.get("*", (req, res) => {
-    return handle(req, res);
-  });
-
-  server.listen(port, err => {
-    if (err) throw err;
-    console.log(`> Ready on http://localhost:${port}`);
-  });
+// An api endpoint that returns a short list of items
+app.get("/api/getList", (req, res) => {
+  var list = ["item1", "item2", "item3"];
+  res.json(list);
+  console.log("Sent list of items");
 });
+
+// Handles any requests that don't match the ones above
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname + "/client/build/index.html"));
+});
+
+const port = process.env.PORT || 5000;
+app.listen(port);
+
+console.log("App is listening on port " + port);

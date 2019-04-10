@@ -3,23 +3,22 @@ import { connect } from "react-redux";
 
 import NewsLayout from "@/pages/layout/news";
 
-import CategoryNav from "../../components/sidebar";
-import NewsCard from "../../components/news-card";
+import CategoryNav from "@/components/sidebar";
+import NewsCard from "@/components/news-card";
+import Loader from "@/components/loader";
+import EmptyNews from "./empty-news";
 
-import { queryNews } from "@/api";
+import { FETCH_NEWS_START } from "./model";
 
 class Home extends Component {
   constructor(props) {
     super();
-    this.state = {
-      topHeadlines: []
-    };
   }
 
-  async fetchNews() {
-    const { language = "en", category = "" } = this.props;
+  fetchNews() {
+    const { language = "en", category = "", dispatch } = this.props;
 
-    const defaultQuery = {
+    const query = {
       sources: "",
       q: "",
       category,
@@ -27,29 +26,23 @@ class Home extends Component {
       country: ""
     };
 
-    // if (params.query) {
-    //   Object.assign(defaultQuery, params.query);
-    // }
-
-    const resp = await queryNews(defaultQuery);
-    if (resp.status === "ok")
-      this.setState({
-        topHeadlines: resp.articles
-      });
+    dispatch({
+      type: FETCH_NEWS_START,
+      payload: query
+    });
   }
 
   componentDidMount() {
     this.fetchNews();
   }
 
-  componentWillReceiveProps(next, prev) {
-    if (next.language !== prev.language || next.category !== prev.category) {
-      this.fetchNews();
-    }
-  }
-
   render() {
-    const { topHeadlines } = this.state;
+    const {
+      newsArticle: { articles, isFetching }
+    } = this.props;
+
+    console.log(this.props.newsArticle);
+
     return (
       <NewsLayout>
         <main className="container">
@@ -59,12 +52,14 @@ class Home extends Component {
                 <CategoryNav />
               </div>
               <div className="col-md-10">
-                {topHeadlines.length === 0 ? (
-                  <div className="text-info">loading news...</div>
-                ) : (
-                  topHeadlines.map((item, index) => {
+                {isFetching ? (
+                  <Loader />
+                ) : articles.length > 0 ? (
+                  articles.map((item, index) => {
                     return <NewsCard item={item} key={index} />;
                   })
+                ) : (
+                  <EmptyNews />
                 )}
               </div>
             </div>
@@ -78,7 +73,8 @@ class Home extends Component {
 const mapState = state => {
   return {
     language: state.language,
-    category: state.category
+    category: state.category,
+    newsArticle: state.newsArticle
   };
 };
 

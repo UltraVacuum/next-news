@@ -6,13 +6,19 @@
 
   @media screen and(min-width: 769px) {
     flex-direction: column;
-    height: 280px;
+    // height: 320px;
   }
 
   .nav-link {
     cursor: pointer;
+
     &:hover {
       background: rgba(117, 170, 219, 0.1);
+    }
+
+    &.active {
+      background: rgba(117, 170, 219, 0.1);
+
     }
   }
 }
