@@ -4107,7 +4107,7 @@ expect@^23.6.0:
     jest-message-util "^23.4.0"
     jest-regex-util "^23.3.0"
 
-express@^4.16.2:
+express@^4.16.2, express@^4.16.4:
   version "4.16.4"
   resolved "http://registry.npm.taobao.org/express/download/express-4.16.4.tgz?cache=0&other_urls=http%3A%2F%2Fregistry.npm.taobao.org%2Fexpress%2Fdownload%2Fexpress-4.16.4.tgz#fddef61926109e24c515ea97fd2f1bdbf62df12e"
   integrity sha1-/d72GSYQniTFFeqX/S8b2/Yt8S4=
@@ -7795,11 +7795,6 @@ pnp-webpack-plugin@1.2.1:
   dependencies:
     ts-pnp "^1.0.0"
 
-polished@^1.9.3:
-  version "1.9.3"
-  resolved "http://registry.npm.taobao.org/polished/download/polished-1.9.3.tgz#d61b8a0c4624efe31e2583ff24a358932b6b75e1"
-  integrity sha1-1huKDEYk7+MeJYP/JKNYkytrdeE=
-
 portfinder@^1.0.9:
   version "1.0.20"
   resolved "http://registry.npm.taobao.org/portfinder/download/portfinder-1.0.20.tgz#bea68632e54b2e13ab7b0c4775e9b41bf270e44a"
@@ -9144,7 +9139,7 @@ react-dev-utils@^8.0.0:
     strip-ansi "5.0.0"
     text-table "0.2.0"
 
-react-dom@^16.5.1, react-dom@^16.8.6:
+react-dom@^16.8.6:
   version "16.8.6"
   resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
   integrity sha1-cdYwP2MeiwCX9WFl72CPBR/24Q8=
@@ -9232,17 +9227,7 @@ react-slick@~0.23.2:
     prettier "^1.14.3"
     resize-observer-polyfill "^1.5.0"
 
-react-spinners-kit@^1.9.0:
-  version "1.9.0"
-  resolved "http://registry.npm.taobao.org/react-spinners-kit/download/react-spinners-kit-1.9.0.tgz#66d55530268f8b5d53816d8fdf90fa7fe04115ef"
-  integrity sha1-ZtVVMCaPi11TgW2P35D6f+BBFe8=
-  dependencies:
-    polished "^1.9.3"
-    prop-types "^15.6.2"
-    react "^16.5.2"
-    react-dom "^16.5.1"
-
-react@^16.5.2, react@^16.8.6:
+react@^16.8.6:
   version "16.8.6"
   resolved "http://registry.npm.taobao.org/react/download/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
   integrity sha1-rWw6lhT9Ok6e9REX9U2IjaAfK74=
