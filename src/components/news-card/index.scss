@@ -7,6 +7,10 @@
 
   @media screen and (min-width: 769px) {
     height: 160px;
+
+    .card-body {
+      height: 160px;
+    }
   }
 
   &:hover {
@@ -21,38 +25,34 @@
 
   .card-img {
     width: 100%;
-    height: 120px;
-
-    @media screen and (min-width: 769px) {
-      height: 160px;
-    }
-
+    height: 160px;
     border-radius: 0;
     overflow: hidden;
   }
 
   .news-img {
-    height: 120px;
-
-    @media screen and (min-width: 769px) {
-      height: 160px;
-    }
-
-    // background: url(../../../static/images/newspaper.svg);
+    height: 160px;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     transition: all 0.4s ease;
+
+    &.placeholder {
+      background-image: url(./images/cover-pre-load.gif);
+    }
   }
 
   .news-title {
     color: rgba(0, 0, 0, 0.84) !important;
     font-weight: 600;
+    max-height: 2.5em;
+    margin-bottom: 8px;
   }
 
   .news-brief {
     color: rgba(0, 0, 0, 0.54) !important;
     fill: rgba(0, 0, 0, 0.54) !important;
+    max-height: 4.2em;
   }
 
   .news-content {
@@ -62,21 +62,21 @@
   .news-author,
   .news-time,
   .news-source {
+    padding: 0 8px;
     color: rgba(0, 0, 0, 0.84) !important;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     line-height: 24px;
   }
 
   .news-source {
-    padding: 0 8px;
-    background: #ffe066;
+    background: #51cf66;
   }
 
   .news-author {
-    padding: 0 8px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    background: #51cf66;
+    background: #ffe066;
+  }
+
+  .news-time {
+    background: #75aadb1a;
   }
 }

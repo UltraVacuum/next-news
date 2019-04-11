@@ -1,12 +1,13 @@
-import { takeLatest, put, select } from "redux-saga/effects";
+import { takeLatest, put } from "redux-saga/effects";
+import { queryNewsArticles } from "@/store/utils";
 
-import { FETCH_NEWS_START } from "@/pages/home/model";
-
+// action pattern
 export const [CHANGE_CATEGORY, CHANGE_CATEGORY_DONE] = [
   "CHANGE_CATEGORY",
   "CHANGE_CATEGORY_DONE"
 ];
 
+// reducer
 export function category(state = "all", action) {
   if (action.type === CHANGE_CATEGORY_DONE) {
     return action.payload;
@@ -14,34 +15,17 @@ export function category(state = "all", action) {
   return state;
 }
 
-const getQueryParams = state => ({
-  language: state.language,
-  category: state.category
-});
-
+// action effects
 function* changeCategory(action) {
   yield put({
     type: CHANGE_CATEGORY_DONE,
     payload: action.payload
   });
 
-  const { category, language } = yield select(getQueryParams);
-  const query = {
-    sources: "",
-    q: "",
-    category,
-    language,
-    country: ""
-  };
-
-  console.log("change category query ===>", query);
-
-  yield put({
-    type: FETCH_NEWS_START,
-    payload: query
-  });
+  yield queryNewsArticles();
 }
 
+// watch flow
 export default function* userChangeCategory() {
   yield takeLatest(CHANGE_CATEGORY, changeCategory);
 }

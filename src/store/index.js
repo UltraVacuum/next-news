@@ -3,25 +3,9 @@ import createSagaMiddleware from "redux-saga";
 import { all, fork } from "redux-saga/effects";
 import logger from "redux-logger";
 
-import userFetchNews, { newsArticle } from "@/pages/home/model";
+import { userFetchNews, userConcatNews, newsArticle } from "@/pages/home/model";
 import userChangeCategory, { category } from "@/components/sidebar/model";
-
-export const CHANGE_LANGUAGE = "CHANGE_LANGUAGE";
-export const changeLanguage = language => {
-  return {
-    type: CHANGE_LANGUAGE,
-    payload: {
-      language
-    }
-  };
-};
-
-function language(state = "en", action) {
-  if (action.type === CHANGE_LANGUAGE) {
-    return action.payload.language;
-  }
-  return state;
-}
+import userChangeLanguage, { language } from "@/components/header/model";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -37,7 +21,12 @@ export default createStore(
 );
 
 function* rootSaga() {
-  yield all([fork(userFetchNews), fork(userChangeCategory)]);
+  yield all([
+    fork(userFetchNews),
+    fork(userConcatNews),
+    fork(userChangeCategory),
+    fork(userChangeLanguage)
+  ]);
 }
 
 sagaMiddleware.run(rootSaga);

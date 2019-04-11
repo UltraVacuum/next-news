@@ -19,5 +19,6 @@ export const getTopHeadlines = params => {
 };
 
 export const queryNews = (params = { language: "en", country: "us" }) => {
+  if (params.category === "all") params.category = "";
   return newsapi.v2.topHeadlines(params);
 };

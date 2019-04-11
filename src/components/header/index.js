@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { changeLanguage } from "@/store";
-// import Router from "react-router";
-import Dropdown from "../dropdown";
 
+import Dropdown from "../dropdown";
 import { colourOptions } from "./select-options";
+import { CHANGE_LANGUAGE } from "./model";
 
 class Header extends Component {
   constructor(props) {
@@ -45,7 +44,9 @@ class Header extends Component {
         </ul> */}
           <Dropdown
             options={colourOptions}
-            onChange={({ value }) => dispatch(changeLanguage(value))}
+            onChange={({ value }) =>
+              dispatch({ type: CHANGE_LANGUAGE, payload: value })
+            }
             value={this.getDefaultLanguage(language)}
             placeholder="Language"
           />

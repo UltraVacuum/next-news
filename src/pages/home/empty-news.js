@@ -7,7 +7,7 @@ export default function EmptyNews() {
     <div className="container">
       <div className="empty-wrap">
         <div className="no-data" />
-        <p className="text-error">No Data Found.</p>
+        <p className="text-error">Not Enough Data.</p>
       </div>
     </div>
   );
