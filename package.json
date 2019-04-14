@@ -9,6 +9,7 @@
     "css-loader": "1.0.0",
     "dayjs": "^1.8.12",
     "express": "^4.16.4",
+    "feedparser": "^2.2.9",
     "newsapi": "^2.4.0",
     "react": "^16.8.6",
     "react-app-polyfill": "^0.2.2",
@@ -20,6 +21,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
+    "request": "^2.88.0",
     "styled-components": "^4.2.0"
   },
   "scripts": {
